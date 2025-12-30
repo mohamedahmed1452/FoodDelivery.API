@@ -1,5 +1,7 @@
 ﻿using FoodDelivery.Core.Entities;
 using FoodDelivery.Core.Repositories;
+using FoodDelivery.Core.specifications;
+using FoodDelivery.Infrastructure;
 using FoodDelivery.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,16 +18,31 @@ namespace FoodDelivery.Repository
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IReadOnlyList<T>> GetAllAsync()
         {
-            if (typeof(T) == typeof(Product))
-                return (IEnumerable<T>) await _dbContext.Products.Include(p => p.Category).Include(p => p.Brand).ToListAsync() ;
+            //if (typeof(T) == typeof(Product))
+            //    return (IReadOnlyList<T>) await _dbContext.Products.Include(p => p.Category).Include(p => p.Brand).ToListAsync() ;
            return await _dbContext.Set<T>().ToListAsync();
         }
-
         public async Task<T?> GetAsync(int id)
         {
+            //if (typeof(T) == typeof(Product))
+            //    return await _dbContext.Products.Include(p => p.Category).Include(p => p.Brand).FirstOrDefaultAsync(p => p.Id == id) as T;
             return await _dbContext.Set<T>().FindAsync(id);
+        }
+
+        public async Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecifications<T> spec)
+        {
+            return await SpecificationsEvaluator<T>.GetQuery(_dbContext.Set<T>(), spec).AsNoTracking().ToListAsync();
+        }
+        public async Task<T?> GetWithSpecAsync(ISpecifications<T> spec)
+        {
+           return await SpecificationsEvaluator<T>.GetQuery(_dbContext.Set<T>(), spec).AsNoTracking().FirstOrDefaultAsync();
+        }
+
+        public Task<int> CountAsync(ISpecifications<T> spec)
+        {
+            return SpecificationsEvaluator<T>.GetQuery(_dbContext.Set<T>(), spec).CountAsync();
         }
     }
 }
