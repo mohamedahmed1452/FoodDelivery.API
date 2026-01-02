@@ -2,10 +2,11 @@
 using FoodDelivery.API.Dtos;
 using FoodDelivery.Core.Entities;
 using FoodDelivery.Core.Entities.Basket;
+using FoodDelivery.Core.Entities.Identity;
 
 namespace FoodDelivery.API.Helpers
 {
-    public class MappingProfile:Profile
+    public class MappingProfile : Profile
     {
         public MappingProfile()
         {
@@ -17,6 +18,7 @@ namespace FoodDelivery.API.Helpers
             CreateMap<CustomerBasketDto, CustomerBasket>();
             CreateMap<BasketItemDto, BasketItem>();
 
+            CreateMap<Address, AddressDto>().ReverseMap();
         }
     }
 }

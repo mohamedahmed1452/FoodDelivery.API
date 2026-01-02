@@ -1,5 +1,4 @@
-﻿using FoodDelivery.Core.Entities.Basket;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace FoodDelivery.API.Dtos
 {

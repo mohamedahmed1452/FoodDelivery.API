@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FoodDelivery.Core.Entities
+﻿namespace FoodDelivery.Core.Entities
 {
     public class BaseEntity
     {

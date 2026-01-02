@@ -1,6 +1,4 @@
-﻿using FoodDelivery.Core.Entities;
-
-namespace FoodDelivery.API.Dtos
+﻿namespace FoodDelivery.API.Dtos
 {
     public class ProductToReturnDto
     {

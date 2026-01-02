@@ -1,6 +1,4 @@
-﻿using FoodDelivery.API.Dtos;
-
-namespace FoodDelivery.API.Helpers
+﻿namespace FoodDelivery.API.Helpers
 {
     public class Pagination<T>
     {

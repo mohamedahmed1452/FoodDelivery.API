@@ -1,12 +1,9 @@
 ﻿using FoodDelivery.Core.Entities;
 using FoodDelivery.Core.specifications;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FoodDelivery.Core.Repositories
 {
-    public interface IGenericRepository<T> where T:BaseEntity
+    public interface IGenericRepository<T> where T : BaseEntity
     {
         //five signatures
         Task<IReadOnlyList<T>> GetAllAsync();

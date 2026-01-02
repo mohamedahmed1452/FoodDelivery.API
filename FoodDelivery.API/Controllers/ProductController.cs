@@ -4,9 +4,8 @@ using FoodDelivery.API.Errors;
 using FoodDelivery.API.Helpers;
 using FoodDelivery.Core.Entities;
 using FoodDelivery.Core.Repositories;
-using FoodDelivery.Core.specifications;
 using FoodDelivery.Core.specifications.Product_Specs;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodDelivery.API.Controllers
@@ -32,7 +31,9 @@ namespace FoodDelivery.API.Controllers
 
         [ProducesResponseType(typeof(IEnumerable<ProductToReturnDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 404)]
+      
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
         {
             var spec = new ProductSpecifications(specParams);

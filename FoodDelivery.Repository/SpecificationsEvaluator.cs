@@ -1,16 +1,12 @@
 ﻿using FoodDelivery.Core.Entities;
 using FoodDelivery.Core.specifications;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FoodDelivery.Infrastructure
 {
     internal static class SpecificationsEvaluator<T> where T : BaseEntity
     {
-        public static IQueryable<T> GetQuery(IQueryable<T> entryQuery,ISpecifications<T> spec)
+        public static IQueryable<T> GetQuery(IQueryable<T> entryQuery, ISpecifications<T> spec)
         {
             //TO DO: later we can add more logic here if needed
             #region Filteration

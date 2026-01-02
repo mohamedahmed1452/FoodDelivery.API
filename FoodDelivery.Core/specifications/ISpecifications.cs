@@ -1,8 +1,5 @@
 ﻿using FoodDelivery.Core.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace FoodDelivery.Core.specifications
 {
@@ -17,7 +14,7 @@ namespace FoodDelivery.Core.specifications
         public int Take { get; set; }
         public int Skip { get; set; }
         public bool IsPaginationEnabled { get; set; }
-  
+
 
     }
 }

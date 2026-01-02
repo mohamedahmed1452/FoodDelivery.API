@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text.Json.Serialization;
 
 namespace FoodDelivery.Core.Entities.Identity
 {
-    public class Address:BaseEntity
+    public class Address : BaseEntity
     {
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;

@@ -5,9 +5,9 @@
 
         public int StatusCode { get; set; }
         public string Message { get; set; }
-        public ApiResponse(int _statusCode,string? _message=null)
+        public ApiResponse(int _statusCode, string? _message = null)
         {
-            StatusCode= _statusCode;
+            StatusCode = _statusCode;
             Message = _message ?? GetDefaultMessageForStatusCode(StatusCode);
         }
 

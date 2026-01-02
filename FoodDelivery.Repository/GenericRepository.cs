@@ -4,9 +4,6 @@ using FoodDelivery.Core.specifications;
 using FoodDelivery.Infrastructure;
 using FoodDelivery.Repository.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FoodDelivery.Repository
 {
@@ -22,7 +19,7 @@ namespace FoodDelivery.Repository
         {
             //if (typeof(T) == typeof(Product))
             //    return (IReadOnlyList<T>) await _dbContext.Products.Include(p => p.Category).Include(p => p.Brand).ToListAsync() ;
-           return await _dbContext.Set<T>().ToListAsync();
+            return await _dbContext.Set<T>().ToListAsync();
         }
         public async Task<T?> GetAsync(int id)
         {
@@ -37,7 +34,7 @@ namespace FoodDelivery.Repository
         }
         public async Task<T?> GetWithSpecAsync(ISpecifications<T> spec)
         {
-           return await SpecificationsEvaluator<T>.GetQuery(_dbContext.Set<T>(), spec).AsNoTracking().FirstOrDefaultAsync();
+            return await SpecificationsEvaluator<T>.GetQuery(_dbContext.Set<T>(), spec).AsNoTracking().FirstOrDefaultAsync();
         }
 
         public Task<int> CountAsync(ISpecifications<T> spec)

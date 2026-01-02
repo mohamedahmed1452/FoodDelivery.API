@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FoodDelivery.Core.Entities.Basket
+﻿namespace FoodDelivery.Core.Entities.Basket
 {
     public class BasketItem
     {

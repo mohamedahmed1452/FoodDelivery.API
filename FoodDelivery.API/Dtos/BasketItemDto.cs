@@ -11,7 +11,7 @@ namespace FoodDelivery.API.Dtos
         [Required]
         public string PictureUrl { get; set; } = null!;
         [Required]
-        [Range(0.1,double.MaxValue,ErrorMessage ="Price Must Be Greater Than Zero")]
+        [Range(0.1, double.MaxValue, ErrorMessage = "Price Must Be Greater Than Zero")]
         public decimal Price { get; set; }
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity Must Be One Item At Least")]

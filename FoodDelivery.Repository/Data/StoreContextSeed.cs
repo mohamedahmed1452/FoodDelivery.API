@@ -1,7 +1,4 @@
 ﻿using FoodDelivery.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 
 namespace FoodDelivery.Repository.Data
@@ -50,7 +47,7 @@ namespace FoodDelivery.Repository.Data
 
                 }
             }
-        
+
 
         }
 

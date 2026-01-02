@@ -2,7 +2,10 @@
 using FoodDelivery.API.Helpers;
 using FoodDelivery.Core.Repositories;
 using FoodDelivery.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace FoodDelivery.API.Extensions
 {
@@ -31,8 +34,38 @@ namespace FoodDelivery.API.Extensions
                 };
             });
 
-            
+
             return Services;
         }
+    
+    public static IServiceCollection AddAuthSecurity(this IServiceCollection Services,IConfiguration Configuration)
+        {
+
+            Services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(
+    option =>
+    {
+        option.TokenValidationParameters = new TokenValidationParameters()
+        {
+            
+            ValidateIssuer = true,
+            ValidIssuer = Configuration["JWT:ValidIssurer"],
+            ValidateAudience = true,
+            ValidAudience = Configuration["JWT:ValidAudience"],
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:AuthKey"] ?? string.Empty)),
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero
+
+
+        };
+    });
+            return Services;
+        }
+   
     }
 }

@@ -1,7 +1,4 @@
 ﻿using FoodDelivery.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FoodDelivery.Core.specifications.Product_Specs
 {
@@ -16,6 +13,6 @@ namespace FoodDelivery.Core.specifications.Product_Specs
         {
 
         }
-  
+
     }
 }

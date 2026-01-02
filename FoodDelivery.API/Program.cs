@@ -1,18 +1,18 @@
-﻿using AutoMapper;
-using FoodDelivery.API.Errors;
-using FoodDelivery.API.Extensions;
-using FoodDelivery.API.Helpers;
+﻿using FoodDelivery.API.Extensions;
 using FoodDelivery.API.Middlewares;
+using FoodDelivery.Application.AuthService;
 using FoodDelivery.Core.Entities.Identity;
 using FoodDelivery.Core.Repositories;
+using FoodDelivery.Core.Services;
 using FoodDelivery.Infrastructure.BasketRepository;
 using FoodDelivery.Infrastructure.Identity;
-using FoodDelivery.Repository;
 using FoodDelivery.Repository.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 #region Register all services => DI
@@ -38,11 +38,15 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => { }).
     AddEntityFrameworkStores<ApplicationUserContext>();
+builder.Services.AddAuthSecurity(builder.Configuration);
+
+
 // Swagger
 builder.Services.AddSwaggerDocumentation();
 
 // Application Services
 builder.Services.AddApplicationServices();
+builder.Services.AddScoped(typeof(IAuthService),typeof(AuthService));
 #endregion
 
 var app = builder.Build();
@@ -89,7 +93,8 @@ app.UseStatusCodePagesWithReExecute("/errors/{0}");// Handle Errors
 
 app.UseHttpsRedirection();// Redirect HTTP to HTTPS
 app.UseStaticFiles();// For wwwroot folder
-app.UseAuthorization();// Authorization Middleware
+app.UseAuthentication();// Authorization Middleware
+app.UseAuthorization();
 app.MapControllers();// Map Controller Endpoints
 
 #endregion

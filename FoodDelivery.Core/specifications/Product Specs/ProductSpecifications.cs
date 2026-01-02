@@ -1,18 +1,14 @@
 ﻿using FoodDelivery.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace FoodDelivery.Core.specifications.Product_Specs
 {
-    public class ProductSpecifications:Specifications<Product>
+    public class ProductSpecifications : Specifications<Product>
     {
         public ProductSpecifications(ProductSpecParams productSpecParams)
             : base(
-                #region Filteration
+        #region Filteration
          p =>
-             (string.IsNullOrEmpty(productSpecParams.Search)||p.Name.ToLower().Contains(productSpecParams.Search.ToLower()))&&
+             (string.IsNullOrEmpty(productSpecParams.Search) || p.Name.ToLower().Contains(productSpecParams.Search.ToLower())) &&
             (!productSpecParams.BrandId.HasValue || p.BrandId == productSpecParams.BrandId.Value) &&
             (!productSpecParams.CategoryId.HasValue || p.CategoryId == productSpecParams.CategoryId.Value)
 
@@ -53,12 +49,12 @@ namespace FoodDelivery.Core.specifications.Product_Specs
             Includes.Add(p => p.Category);
             #endregion
 
-             
 
-         
+
+
 
         }
-        public ProductSpecifications(int id):base(p => p.Id == id)
+        public ProductSpecifications(int id) : base(p => p.Id == id)
         {
             Includes.Add(p => p.Brand);
             Includes.Add(p => p.Category);

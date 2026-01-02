@@ -1,5 +1,4 @@
 ﻿using FoodDelivery.API.Errors;
-using Microsoft.EntityFrameworkCore.Metadata;
 using System.Text.Json;
 
 namespace FoodDelivery.API.Middlewares
@@ -11,7 +10,7 @@ namespace FoodDelivery.API.Middlewares
         private readonly IWebHostEnvironment env;
 
         public ExceptionMiddleware(RequestDelegate next,
-            ILogger<ExceptionMiddleware> logger,IWebHostEnvironment env) 
+            ILogger<ExceptionMiddleware> logger, IWebHostEnvironment env)
         {
             this.next = next;
             this.logger = logger;
@@ -21,8 +20,8 @@ namespace FoodDelivery.API.Middlewares
         public async Task InvokeAsync(HttpContext context)
         {
             //take action on request
-            
-       
+
+
             try
             {
                 await next.Invoke(context);

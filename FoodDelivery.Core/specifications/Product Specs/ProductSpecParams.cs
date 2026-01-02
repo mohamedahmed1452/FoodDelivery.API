@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FoodDelivery.Core.specifications.Product_Specs
+﻿namespace FoodDelivery.Core.specifications.Product_Specs
 {
     public class ProductSpecParams
     {
@@ -12,7 +8,7 @@ namespace FoodDelivery.Core.specifications.Product_Specs
         private const int MaxPageSize = 10;
         private int pageSize = 5;
         public int PageIndex { get; set; } = 1;
-        public string Search { get; set; }
+        public string? Search { get; set; }
         public int PageSize
         {
             get { return pageSize; }

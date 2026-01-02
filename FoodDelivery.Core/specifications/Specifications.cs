@@ -1,8 +1,5 @@
 ﻿using FoodDelivery.Core.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace FoodDelivery.Core.specifications
 {
@@ -23,7 +20,7 @@ namespace FoodDelivery.Core.specifications
 
         public void AddOrderBy(Expression<Func<T, object>>? OrderBy)
         {
-         this.OrderBy = OrderBy;
+            this.OrderBy = OrderBy;
         }
         public void AddOrderByDescending(Expression<Func<T, object>>? OrderByDescending)
         {
