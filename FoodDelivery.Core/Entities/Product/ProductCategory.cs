@@ -1,4 +1,4 @@
-﻿namespace FoodDelivery.Core.Entities
+﻿namespace FoodDelivery.Core.Entities.Product
 {
     public class ProductCategory : BaseEntity
     {

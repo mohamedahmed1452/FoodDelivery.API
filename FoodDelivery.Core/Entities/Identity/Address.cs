@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace FoodDelivery.Core.Entities.Identity
+﻿namespace FoodDelivery.Core.Entities.Identity
 {
     public class Address : BaseEntity
     {

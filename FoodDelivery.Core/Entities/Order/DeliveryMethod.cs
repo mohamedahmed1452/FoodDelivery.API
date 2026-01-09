@@ -1,11 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FoodDelivery.Core.Entities.Order
+﻿namespace FoodDelivery.Core.Entities.Order
 {
-    public class DeliveryMethod:BaseEntity
+    public class DeliveryMethod : BaseEntity
     {
+        public DeliveryMethod()
+        {
+        }
+
+        public DeliveryMethod(string shortName, string description, decimal cost, string deliveryTime)
+        {
+            ShortName = shortName;
+            Description = description;
+            Cost = cost;
+            DeliveryTime = deliveryTime;
+        }
+
         public string ShortName { get; set; } = null!;
         public string Description { get; set; } = null!;
         public decimal Cost { get; set; }

@@ -1,12 +1,12 @@
-﻿using FoodDelivery.Core.Entities;
+﻿using FoodDelivery.Core.Entities.Product;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodDelivery.Repository.Data.Configs
 {
-    public class BrandConfiguration : IEntityTypeConfiguration<ProductBrand>
+    public class CategoryConfiguration : IEntityTypeConfiguration<ProductCategory>
     {
-        public void Configure(EntityTypeBuilder<ProductBrand> builder)
+        public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
             builder.Property(b => b.Name).HasMaxLength(100).IsRequired();
 

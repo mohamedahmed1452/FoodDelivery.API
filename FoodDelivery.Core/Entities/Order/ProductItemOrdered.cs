@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FoodDelivery.Core.Entities.Order
+﻿namespace FoodDelivery.Core.Entities.Order
 {
     public class ProductItemOrdered
     {
-        public string ProductId { get; set; } = null!;
+        public ProductItemOrdered()
+        {
+        }
+
+        public ProductItemOrdered(int productId, string productName, string pictureUrl)
+        {
+            ProductId = productId;
+            ProductName = productName;
+            PictureUrl = pictureUrl;
+        }
+
+        public int ProductId { get; set; }
         public string ProductName { get; set; } = null!;
         public string PictureUrl { get; set; } = null!;
     }

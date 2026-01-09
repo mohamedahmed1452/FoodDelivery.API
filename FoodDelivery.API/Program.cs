@@ -7,22 +7,61 @@ using FoodDelivery.Core.Services;
 using FoodDelivery.Infrastructure.BasketRepository;
 using FoodDelivery.Infrastructure.Identity;
 using FoodDelivery.Repository.Data;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 #region Register all services => DI
 
 builder.Services.AddControllers();
 
+
+#region Business Database
+
 builder.Services.AddDbContext<StoreContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });// For Business Module
+builder.Services.AddSingleton<IConnectionMultiplexer>(oprtion =>
+{
+    return ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis"));
+}); //For redis Database 
+
+/*
+ * using StackExchange.Redis;
+
+public class ConnectBasicExample
+{
+
+    public void run()
+    {
+        var muxer = ConnectionMultiplexer.Connect(
+            new ConfigurationOptions{
+                EndPoints= { {"redis-13216.c14.us-east-1-2.ec2.cloud.redislabs.com", 13216} },
+                User="default",
+                Password="8wJ059zXWfAz5ErbakFmnTEVE4kgFUEd"
+            }
+        );
+        var db = muxer.GetDatabase();
+        
+        db.StringSet("foo", "bar");
+        RedisValue result = db.StringGet("foo");
+        Console.WriteLine(result); // >>> bar
+        
+    }
+}
+
+ 
+ 
+ 
+ 
+ 
+ */
+
+#endregion
+
+#region Security Database
 
 builder.Services.AddDbContext<ApplicationUserContext>(options =>
 {
@@ -30,26 +69,60 @@ builder.Services.AddDbContext<ApplicationUserContext>(options =>
 });// For Security Module
 
 
-builder.Services.AddScoped<IConnectionMultiplexer>(oprtion =>
-{
-    return ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis"));
-});
+
+
+#endregion
+
+
+
+
+#region Application Register
+
+// Application Services
+builder.Services.AddApplicationServices();
+
+
+
+#endregion
+
+
+#region Basket Module
+
+
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+
+
+#endregion
+
+
+
+#region Security Register
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => { }).
     AddEntityFrameworkStores<ApplicationUserContext>();
 builder.Services.AddAuthSecurity(builder.Configuration);
 
 
+builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
+
+#endregion
+
+
+
+
+
+
+
+#region Swagger Register
 // Swagger
 builder.Services.AddSwaggerDocumentation();
+#endregion
 
-// Application Services
-builder.Services.AddApplicationServices();
-builder.Services.AddScoped(typeof(IAuthService),typeof(AuthService));
 #endregion
 
 var app = builder.Build();
+
+
 
 // migrate db
 #region Update Database and Data Seed
@@ -98,4 +171,7 @@ app.UseAuthorization();
 app.MapControllers();// Map Controller Endpoints
 
 #endregion
+
+
+
 app.Run();// Run the application

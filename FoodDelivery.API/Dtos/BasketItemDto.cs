@@ -15,8 +15,7 @@ namespace FoodDelivery.API.Dtos
         public decimal Price { get; set; }
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Quantity Must Be One Item At Least")]
-
-        public int Quentaty { get; set; }
+        public int Quantity { get; set; }
         [Required]
         public string Brand { get; set; } = null!;
         [Required]

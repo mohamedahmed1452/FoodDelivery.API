@@ -44,7 +44,7 @@ namespace FoodDelivery.Application.AuthService
             #region PayLoad 
                 audience: config["JWT:ValidAudience"],
                 issuer: config["JWT:ValidIssurer"],
-                expires: DateTime.UtcNow.AddMinutes(double.Parse(config["JWT:DurationInMins"] ?? "5")),
+                expires: DateTime.UtcNow.AddDays(double.Parse(config["JWT:DurationInDays"] ?? "1")),
                 claims: authClaims
             #endregion
 

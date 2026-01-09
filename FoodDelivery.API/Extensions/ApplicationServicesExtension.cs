@@ -1,10 +1,15 @@
 ﻿using FoodDelivery.API.Errors;
 using FoodDelivery.API.Helpers;
-using FoodDelivery.Core.Repositories;
-using FoodDelivery.Repository;
+using FoodDelivery.Application.CachingService;
+using FoodDelivery.Application.OrderService;
+using FoodDelivery.Application.PrdoductService;
+using FoodDelivery.Core;
+using FoodDelivery.Core.Services;
+using FoodDelivery.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using ProtoBuf.Meta;
 using System.Text;
 
 namespace FoodDelivery.API.Extensions
@@ -13,8 +18,10 @@ namespace FoodDelivery.API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection Services)
         {
-            Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
+            Services.AddSingleton(typeof(IResponseCacheService), typeof(ResponseCacheService));
+            Services.AddScoped(typeof(IProductService), typeof(ProductService));
+            Services.AddScoped(typeof(IOrderService), typeof(OrderService));
+            Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             //builder.Services.AddAutoMapper(Mapper=> Mapper.AddProfile(new MappingProfile()));
             Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -32,13 +39,13 @@ namespace FoodDelivery.API.Extensions
                     };
                     return new BadRequestObjectResult(ValidationErrorResponse);
                 };
-            });
+            });//Model State Valid
 
 
             return Services;
         }
-    
-    public static IServiceCollection AddAuthSecurity(this IServiceCollection Services,IConfiguration Configuration)
+
+        public static IServiceCollection AddAuthSecurity(this IServiceCollection Services, IConfiguration Configuration)
         {
 
             Services.AddAuthentication(option =>
@@ -51,7 +58,7 @@ namespace FoodDelivery.API.Extensions
     {
         option.TokenValidationParameters = new TokenValidationParameters()
         {
-            
+
             ValidateIssuer = true,
             ValidIssuer = Configuration["JWT:ValidIssurer"],
             ValidateAudience = true,
@@ -66,6 +73,6 @@ namespace FoodDelivery.API.Extensions
     });
             return Services;
         }
-   
+
     }
 }

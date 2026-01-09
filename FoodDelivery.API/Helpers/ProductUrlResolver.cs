@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FoodDelivery.API.Dtos;
-using FoodDelivery.Core.Entities;
+using FoodDelivery.Core.Entities.Product;
 
 namespace FoodDelivery.API.Helpers
 {

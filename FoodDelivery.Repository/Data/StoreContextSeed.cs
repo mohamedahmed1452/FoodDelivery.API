@@ -1,4 +1,5 @@
-﻿using FoodDelivery.Core.Entities;
+﻿using FoodDelivery.Core.Entities.Order;
+using FoodDelivery.Core.Entities.Product;
 using System.Text.Json;
 
 namespace FoodDelivery.Repository.Data
@@ -48,7 +49,18 @@ namespace FoodDelivery.Repository.Data
                 }
             }
 
+            if (!dbContext.DeliveryMethods.Any())//true if one element inside collection
+            {
+                var deliveryMethodsData = File.ReadAllText("../FoodDelivery.Repository/Data/DataSeed/delivery.json");
+                var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodsData);
+                if (deliveryMethods?.Count > 0)
+                {
+                    foreach (var delivery in deliveryMethods)
+                        await dbContext.DeliveryMethods.AddAsync(delivery);
+                    await dbContext.SaveChangesAsync();
 
+                }
+            }
         }
 
     }

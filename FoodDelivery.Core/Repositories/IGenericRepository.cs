@@ -12,6 +12,10 @@ namespace FoodDelivery.Core.Repositories
         Task<T?> GetWithSpecAsync(ISpecifications<T> spec);
         Task<int> CountAsync(ISpecifications<T> spec);
 
+        Task AddAsync(T item);
+        void Update(T item);
+        void Dalata(T item);
+
 
     }
 }

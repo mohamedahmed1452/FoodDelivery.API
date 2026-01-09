@@ -41,5 +41,17 @@ namespace FoodDelivery.Repository
         {
             return SpecificationsEvaluator<T>.GetQuery(_dbContext.Set<T>(), spec).CountAsync();
         }
+
+        public async Task AddAsync(T item)
+        => await _dbContext.Set<T>().AddAsync(item);
+
+
+
+
+        public void Update(T item)
+         => _dbContext.Set<T>().Update(item);
+
+        public void Dalata(T item)
+       => _dbContext.Set<T>().Remove(item);
     }
 }

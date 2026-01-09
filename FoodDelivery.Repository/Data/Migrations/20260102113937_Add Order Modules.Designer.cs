@@ -4,6 +4,7 @@ using FoodDelivery.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodDelivery.Repository.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20260102113937_Add Order Modules")]
+    partial class AddOrderModules
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,8 +240,7 @@ namespace FoodDelivery.Repository.Data.Migrations
                 {
                     b.HasOne("FoodDelivery.Core.Entities.Order.Order", null)
                         .WithMany("Items")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OrderId");
 
                     b.OwnsOne("FoodDelivery.Core.Entities.Order.ProductItemOrdered", "Product", b1 =>
                         {

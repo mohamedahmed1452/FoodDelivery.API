@@ -1,4 +1,4 @@
-﻿using FoodDelivery.Core.Entities;
+﻿using FoodDelivery.Core.Entities.Product;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,4 +1,4 @@
-﻿using FoodDelivery.Core.Entities;
+﻿using FoodDelivery.Core.Entities.Product;
 
 namespace FoodDelivery.Core.specifications.Product_Specs
 {

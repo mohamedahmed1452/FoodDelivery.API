@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Runtime.Serialization;
 
 namespace FoodDelivery.Core.Entities.Order
 {
     public enum OrderStatus
     {
+        [EnumMember(Value ="Pending")]
         Pending,
+        [EnumMember(Value = "Payment Received")]
         PaymentReceived,
+        [EnumMember(Value = "Payment Failed")]
         PaymentFailed
     }
 }

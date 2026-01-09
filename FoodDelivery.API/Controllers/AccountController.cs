@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FoodDelivery.API.Dtos;
 using FoodDelivery.API.Errors;
-using FoodDelivery.Application.AuthService;
 using FoodDelivery.Core.Entities.Identity;
 using FoodDelivery.Core.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -29,7 +28,7 @@ namespace FoodDelivery.API.Controllers
             this.userManager = userManager;
             this.authService = authService;
             this.mapper = mapper;
-            
+
         }
 
         [HttpPost("Login")]
@@ -46,9 +45,9 @@ namespace FoodDelivery.API.Controllers
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
-                AccessToken= authDto.AccessToken,
-                RefreshToken= authDto.RefreshToken,
-                RefreshTokenExpiresAt= authDto.RefreshTokenExpiresAt
+                AccessToken = authDto.AccessToken,
+                RefreshToken = authDto.RefreshToken,
+                RefreshTokenExpiresAt = authDto.RefreshTokenExpiresAt
             });
 
 
