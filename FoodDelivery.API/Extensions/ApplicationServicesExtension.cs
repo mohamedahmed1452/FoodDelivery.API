@@ -2,6 +2,7 @@
 using FoodDelivery.API.Helpers;
 using FoodDelivery.Application.CachingService;
 using FoodDelivery.Application.OrderService;
+using FoodDelivery.Application.PaymentService;
 using FoodDelivery.Application.PrdoductService;
 using FoodDelivery.Core;
 using FoodDelivery.Core.Services;
@@ -21,6 +22,7 @@ namespace FoodDelivery.API.Extensions
             Services.AddSingleton(typeof(IResponseCacheService), typeof(ResponseCacheService));
             Services.AddScoped(typeof(IProductService), typeof(ProductService));
             Services.AddScoped(typeof(IOrderService), typeof(OrderService));
+            Services.AddScoped(typeof(IPaymentService), typeof(PaymentService));
             Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             //builder.Services.AddAutoMapper(Mapper=> Mapper.AddProfile(new MappingProfile()));
             Services.AddAutoMapper(typeof(MappingProfile));

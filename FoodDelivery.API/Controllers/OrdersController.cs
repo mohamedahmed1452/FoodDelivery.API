@@ -38,6 +38,8 @@ namespace FoodDelivery.API.Controllers
             return Ok(mapper.Map<OrderToReturnDto>(order));
 
         }
+        
+        
         [ProducesResponseType(typeof(IReadOnlyList<DeliveryMethod>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         [HttpGet("deliverymethods")]
@@ -50,7 +52,7 @@ namespace FoodDelivery.API.Controllers
         [Authorize]
         [ProducesResponseType(typeof(Order), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
-        [HttpGet]
+        [HttpGet("{OrderId}")]
         public async Task<ActionResult<OrderToReturnDto>> GetSpecificOrderForSpecificUser(int OrderId)
         {
             var BuyerEmail = User.FindFirstValue(ClaimTypes.Email);

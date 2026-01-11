@@ -12,12 +12,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace FoodDelivery.API.Controllers
 {
 
-    public class ProductController : BaseApiController
+    public class ProductsController : BaseApiController
     {
         private readonly IProductService productService;
         private readonly IMapper mapper;
 
-        public ProductController(
+        public ProductsController(
             IProductService productService,
             IMapper mapper)
         {
@@ -28,7 +28,7 @@ namespace FoodDelivery.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<ProductToReturnDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 404)]
 
-        [Cached(6000)]
+        //[Cached(6000)]
         [ProducesResponseType(typeof(ProductToReturnDto), 200)]
         [ProducesResponseType(typeof(ApiResponse), 404)]
         [HttpGet]
@@ -42,7 +42,7 @@ namespace FoodDelivery.API.Controllers
             var totalItems = await productService.GetCountAsync(countSpec);
             return Ok(new Pagination<ProductToReturnDto>(data, specParams.PageSize, specParams.PageIndex, totalItems));
         }
-        [Cached(6000)]
+        //[Cached(6000)]
         [ProducesResponseType(typeof(IReadOnlyList<ProductToReturnDto>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 404)]
         [HttpGet("{id}")]// baseurl/product/id 
@@ -53,7 +53,6 @@ namespace FoodDelivery.API.Controllers
             return Ok(productDto);  //status code 200
 
         }
-        [Authorize]
         [ProducesResponseType(typeof(IReadOnlyList<ProductBrand>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 404)]
         [HttpGet("brands")]
@@ -63,7 +62,6 @@ namespace FoodDelivery.API.Controllers
             return Ok(brand);
         }
 
-        [Authorize]
         [ProducesResponseType(typeof(IReadOnlyList<ProductCategory>), 200)]
         [ProducesResponseType(typeof(ApiResponse), 404)]
         [HttpGet("categories")]

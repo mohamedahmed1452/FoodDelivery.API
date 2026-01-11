@@ -1,22 +1,28 @@
-﻿using FoodDelivery.Core;
+﻿using FoodDelivery.Application.PaymentService;
+using FoodDelivery.Core;
 using FoodDelivery.Core.Entities.Order;
 using FoodDelivery.Core.Entities.Product;
 using FoodDelivery.Core.Repositories;
 using FoodDelivery.Core.Services;
 using FoodDelivery.Core.specifications;
 using FoodDelivery.Core.specifications.Order_Specs;
+using FoodDelivery.Infrastructure;
 namespace FoodDelivery.Application.OrderService
 {
     public class OrderService : IOrderService
     {
         private readonly IBasketRepository basketRepo;
         private readonly IUnitOfWork unitOfWork;
+        private readonly IPaymentService paymentService;
+
         public OrderService(IBasketRepository BasketRepo,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork,
+            IPaymentService paymentService)
 
         {
             basketRepo = BasketRepo;
             this.unitOfWork = unitOfWork;
+            this.paymentService = paymentService;
         }
         public async Task<Order?> CreatOrderAsync(string buyerEmail, int delivryMethodId, string basketId, Address shippingAddress)
         {
@@ -41,13 +47,29 @@ namespace FoodDelivery.Application.OrderService
             var subTotal = Items.Sum(o => o.Quantity * o.Price);
             //Get Delivery Method
             var deliveryMethod = await unitOfWork.GetRepository<DeliveryMethod>().GetAsync(delivryMethodId);
+            
+            //Check Existing Order
+            var ordersRepo = unitOfWork.GetRepository<Order>();
+
+            var orderSpecs = new OrderWithPaymentIntentSpecification(basket.PaymentIntentId);
+
+            var existingOrder = await ordersRepo.GetWithSpecAsync(orderSpecs);
+            if (existingOrder is not null)
+            {
+                ordersRepo.Delete(existingOrder);
+                await paymentService.CreateOrUpdatePaymentIntent(basketId);
+            }
+
+
             //Create Order
             var order = new Order(buyerEmail: buyerEmail,
                 status: OrderStatus.Pending,
                 shippingAddress: shippingAddress,
                 deliveryMethod: deliveryMethod,
                 items: Items,
-                subTotal: subTotal
+                subTotal: subTotal,
+                paymentIntentId: basket.PaymentIntentId
+               
                );
 
             await unitOfWork.GetRepository<Order>().AddAsync(order);

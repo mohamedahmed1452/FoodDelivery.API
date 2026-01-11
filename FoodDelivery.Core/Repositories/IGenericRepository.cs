@@ -14,7 +14,7 @@ namespace FoodDelivery.Core.Repositories
 
         Task AddAsync(T item);
         void Update(T item);
-        void Dalata(T item);
+        void Delete(T item);
 
 
     }

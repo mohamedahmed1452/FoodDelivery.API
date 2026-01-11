@@ -2,7 +2,7 @@
 {
     public class Order : BaseEntity
     {
-        public Order(string buyerEmail, OrderStatus status, Address shippingAddress, DeliveryMethod? deliveryMethod, ICollection<OrderItem> items, decimal subTotal)
+        public Order(string buyerEmail, OrderStatus status, Address shippingAddress, DeliveryMethod? deliveryMethod, ICollection<OrderItem> items, decimal subTotal,string paymentIntentId)
         {
             BuyerEmail = buyerEmail;
             Status = status;
@@ -10,6 +10,7 @@
             DeliveryMethod = deliveryMethod;
             Items = items;
             SubTotal = subTotal;
+            PaymentIntentId = paymentIntentId;
         }
 
         public Order()
@@ -24,7 +25,7 @@
         public ICollection<OrderItem> Items { get; set; } = new HashSet<OrderItem>();
         public decimal SubTotal { get; set; }
         public decimal GetTotal() => SubTotal + DeliveryMethod?.Cost ?? 0;
-        public string PaymentIntentId { get; set; } = string.Empty;
+        public string? PaymentIntentId { get; set; } = string.Empty;
 
 
     }

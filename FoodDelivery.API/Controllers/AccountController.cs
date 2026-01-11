@@ -45,7 +45,7 @@ namespace FoodDelivery.API.Controllers
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
-                AccessToken = authDto.AccessToken,
+                Token = authDto.AccessToken,
                 RefreshToken = authDto.RefreshToken,
                 RefreshTokenExpiresAt = authDto.RefreshTokenExpiresAt
             });
@@ -73,7 +73,7 @@ namespace FoodDelivery.API.Controllers
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                AccessToken = authDto.AccessToken,
+                Token = authDto.AccessToken,
                 RefreshToken = authDto.RefreshToken,
                 RefreshTokenExpiresAt = authDto.RefreshTokenExpiresAt
             });
@@ -110,7 +110,7 @@ namespace FoodDelivery.API.Controllers
             {
                 DisplayName = user?.DisplayName ?? string.Empty,
                 Email = user?.Email ?? string.Empty,
-                AccessToken = authDto.AccessToken,
+                Token = authDto.AccessToken,
                 RefreshToken = authDto.RefreshToken,
                 RefreshTokenExpiresAt = authDto.RefreshTokenExpiresAt
             });

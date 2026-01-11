@@ -28,36 +28,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(oprtion =>
     return ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("Redis"));
 }); //For redis Database 
 
-/*
- * using StackExchange.Redis;
 
-public class ConnectBasicExample
-{
-
-    public void run()
-    {
-        var muxer = ConnectionMultiplexer.Connect(
-            new ConfigurationOptions{
-                EndPoints= { {"redis-13216.c14.us-east-1-2.ec2.cloud.redislabs.com", 13216} },
-                User="default",
-                Password="8wJ059zXWfAz5ErbakFmnTEVE4kgFUEd"
-            }
-        );
-        var db = muxer.GetDatabase();
-        
-        db.StringSet("foo", "bar");
-        RedisValue result = db.StringGet("foo");
-        Console.WriteLine(result); // >>> bar
-        
-    }
-}
-
- 
- 
- 
- 
- 
- */
 
 #endregion
 
@@ -119,6 +90,21 @@ builder.Services.AddSwaggerDocumentation();
 #endregion
 
 #endregion
+// في Program.cs (في الجزء بتاع الـ Services)
+#region CORS Problem Registration
+builder.Services.AddCors(options =>
+{
+options.AddPolicy("CorsPolicy", policy =>
+{
+policy.AllowAnyHeader()
+      .AllowAnyMethod()
+      .WithOrigins(
+          "http://localhost:4200",      // عشان الأنغولار اللوكال بتاعك
+          "http://deliveryfood.runasp.net" // عشان لما ترفع الأنغولار بعدين
+      );
+});
+}); 
+#endregion
 
 var app = builder.Build();
 
@@ -157,10 +143,11 @@ using (var scope = app.Services.CreateScope())
 
 app.UseMiddleware<ExceptionMiddleware>();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwaggerMiddleware();// Swagger Middleware
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwaggerMiddleware();// Swagger Middleware
+//}
+app.UseSwaggerMiddleware();// Swagger Middleware
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}");// Handle Errors
 
@@ -168,7 +155,13 @@ app.UseHttpsRedirection();// Redirect HTTP to HTTPS
 app.UseStaticFiles();// For wwwroot folder
 app.UseAuthentication();// Authorization Middleware
 app.UseAuthorization();
+#region CORS Pipeline
+app.UseCors("CorsPolicy");
+#endregion
+
 app.MapControllers();// Map Controller Endpoints
+app.MapFallbackToController("Index", "Fallback");
+
 
 #endregion
 

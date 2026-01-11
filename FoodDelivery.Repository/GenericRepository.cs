@@ -51,7 +51,7 @@ namespace FoodDelivery.Repository
         public void Update(T item)
          => _dbContext.Set<T>().Update(item);
 
-        public void Dalata(T item)
+        public void Delete(T item)
        => _dbContext.Set<T>().Remove(item);
     }
 }
