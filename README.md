@@ -2,9 +2,9 @@
 
 [![Live Demo](https://img.shields.io/badge/Demo-Online-brightgreen?style=for-the-badge&logo=google-chrome&logoColor=white)](http://deliveryfood.runasp.net/)
 ![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)
-![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
+![Angular](http://deliveryfood.runasp.net/)
+![SQL Server](https://webmssql.monsterasp.net/msql/mylittleadmin.aspx)
+![Redis](https://ri.redis.io/13888409/browser?v=1768134457237&theme=dark-2)
 
 A scalable, full-stack food delivery application architected with **ASP.NET Core (Web API)** and **Angular**. This project demonstrates enterprise-level development practices, focusing on performance, scalability, and maintainability using **Clean Architecture**.
 
