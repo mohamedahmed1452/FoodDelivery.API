@@ -1,8 +1,8 @@
 # 🍔 Food Delivery Platform (Full Stack)
 
-[![Live Demo](https://img.shields.io/badge/Demo-Online-brightgreen?style=for-the-badge&logo=google-chrome&logoColor=white)](http://deliveryfood.runasp.net/)
-[![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](http://mohamed-talabat.runasp.net/index.html)
-[![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)](http://deliveryfood.runasp.net/)
+[![Live Demo](https://img.shields.io/badge/Demo-Online-brightgreen?style=for-the-badge&logo=google-chrome&logoColor=white)](https://deliveryfood.runasp.net/)
+[![.NET](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://deliveryfood.runasp.net/swagger/index.html)
+[![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://deliveryfood.runasp.net/)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-CC2927?style=for-the-badge&logo=microsoft-sql-server&logoColor=white)](https://webmssql.monsterasp.net/msql/mylittleadmin.aspx)
 [![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)](https://ri.redis.io/13888409/browser?v=1768134457237&theme=dark-2)
 
@@ -10,7 +10,7 @@ A scalable, full-stack food delivery application architected with **ASP.NET Core
 
 ## 🌐 Live Demo
 
-🚀 **Check out the live application here:** 👉 **[http://deliveryfood.runasp.net/](http://deliveryfood.runasp.net/)**
+🚀 **Check out the live application here:** 👉 **[http://deliveryfood.runasp.net/](https://deliveryfood.runasp.net/)**
 
 ---
 
